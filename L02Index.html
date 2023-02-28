@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>express middleware</title>
+</head>
+<body>
+  <h1>express.js 미들웨어(== 톰캣 filter, 스프링 interceptor) 개념잡기!!</h1> <!-- express : 미들웨어를 제공하는 프레임워크 -->
+  <p>미들웨어는 요청 전에 가로채서 실행되는 동적페이지</p>
+  <ul>
+    <li><a href="/a.do">/a.do</a></li>
+    <li><a href="/user/b.do">/user/b.do</a></li>
+    <li><a href="/user/c.do">"/user/c.do</a></li>
+    <li><a href="/user/b.do?id=동홍">/user/b.do?id=동홍 요청</a></li>
+    <li><a href="/user/c.do?id=동일">"/user/c.do?id=동일 요청</a></li>
+    <li><a href="/board/d.do">/board/d.do</a></li>
+  </ul>
+  <h2>미들웨어 정의 방법 및 개념</h2> <!-- 미들웨어 : 검사식 -->
+  <ul>
+    <li>app.use("urlPattern",(req,res,next)=>{....next()})</li>  <!-- url은 특정리소스 / urlPattern : 광범위한 url -->
+    <li>urlPattern: * 와일드 카드를 이용해 특정 요청의 복수를 한꺼번에 처리 예) /a/b/*(중간에오는 폴더가 a,b 이고 모든 리소스), *.do (do로 오는 모든 요청), /**/login.do(중간폴더 상관x login.do 파일 요청)</li>
+<!--  /**/login.do : /user/login.do , /board/user/login.do, /a/b/c/d/e/login.do  (** : 중간에 어떤폴더가 존재하든 login.do 파일 요청) -->
+    <li>next() : 브라우저가 요청한 url 을 미들웨어가 요청하는 함수</li>
+    <li>app.use 를 순서대로 작성하면 미들웨어가 순서대로 처리된다.</li> <!-- app.use 명시적 / app.get 도 쓸수있지만.. -->
+    <li>미들웨어는 중간처리자로 특정 리소스에 대한 요청을 하기 전에 동작하는 동적페이지</li>
+    <li>사용법 1: 특정 url 에 대한 검사식(로그인이 된 유저만 해당 리소스를 요청가능, 해당 파라미터가 꼭 존재해야함)</li> <!-- 중요 사용법! --> <!-- 이 url 을 처리해도 되냐. 가도 되냐 -->
+    <li>사용법 2: 라이브러리를 미들웨어로 적용가능 (템플릿엔진,POST 방식으로 오는 파라미터 처리, **)</li>
+  </ul>
+<!--
+  * 미들웨어가 가로챔! /user/c.do
+  /user/* 미들웨어가 가로챔! /user/c.do
+-->
+<!-- 미들웨어 : 익스프레스에서 있는 중간처리자 이름  -->
+<!-- 다른 프레임워크도 미들웨어가 있다. 이름이 다를 뿐! 톰캣 filter, 스프링 interceptor -->
+</body>
+</html>

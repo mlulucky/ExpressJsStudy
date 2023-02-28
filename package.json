@@ -1,0 +1,18 @@
+{
+  "name": "expressjsstudy",
+  "version": "1.0.0",
+  "description": "express 로 웹앱만들기",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "moon eunjeong",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mysql2": "^3.1.2",
+    "nodemon": "^2.0.20",
+    "pug": "^3.0.2"
+  }
+}

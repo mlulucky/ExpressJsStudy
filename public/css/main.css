@@ -1,0 +1,29 @@
+body,html {
+    padding: 0; margin: 0;
+    /* 화면 전체 패딩, 마진 없애기 */
+}
+#headerNav {
+    background-color:  black;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; /* 좌우 끝 정렬 */
+}
+#headerNav>ul{
+    display: flex;
+    list-style: none;
+}
+#headerNav>ul>li{
+    padding: 0 10px;
+}
+#headerNav>ul>li:hover a { /* 속성선택자 우선으로 a가 더 높다. hover 가 생겼을때 a 태그에 속성주기 */
+    color: aquamarine;
+}
+
+
+#headerNav a {
+    color: #fff;
+    text-decoration: none;
+}
+main {
+    margin: 20px;
+}

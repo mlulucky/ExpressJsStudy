@@ -1,0 +1,10 @@
+html(lang="en")
+    header
+        meta(charset="UTF-8")
+        link(rel="stylesheet",href="/css/main.css")
+        // public 경로는 제외
+    body
+        include headerNav.pug
+        // layout block : content 로 명령된 퍼그를 포함시키겠다.(emp detail,insert,list,update.pug) 레이아웃의 명령어
+        block content
+

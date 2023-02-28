@@ -1,0 +1,46 @@
+extends layout
+block content
+    main
+        form(name="empUpdateForm",action="/emp/update.do",method="POST")
+            div
+                p
+                    span 사번 :
+                    strong=emp.EMPNO
+                    input(value=emp.EMPNO,name="empno",type="hidden")
+                p
+                    span 이름 :
+                    input(value=emp.ENAME,name="ename")
+                p
+                    span 직책 :
+                    input(value=emp.JOB,name="job")
+                p
+                    span 급여 :
+                    input(value=emp.SAL,name="sal")
+                p
+                    span 상여금 :
+                    input(value=emp.COMM,name="comm")
+                p
+                    span 입사일 :
+                    -let nowStr="";
+                    -if(emp.HIREDATE)
+                        -let y=emp.HIREDATE.getUTCFullYear();
+                        -let m=emp.HIREDATE.getUTCMonth()+1;
+                        -m=(m<10)?`0${m}`:m;
+                        -let d=emp.HIREDATE.getUTCDate();
+                        -d=(d<10)?`0${d}`:d;
+                        -nowStr=`${y}-${m}-${d}`;
+                    input(value=nowStr, name="hiredate",type="date")
+                    // pug 는 {} 블럭 문법이 없다.
+                    // 동적페이지의 일부! 보안은 걱정하지 않아도 된다!(퍼그는 서버사이드렌더링-동적페이지) (값에대한 연산이 포함X. 값만 나온다.)
+                    // 템플릿 엔진(pug) 동적페이지 => html 렌더링(서버사이드렌더링) => 배포 (😃서버사이드렌더링이 보안이 가장 좋다)(서버에 값들이 적혀있는 것이다!!)
+                    // 입사일이 있으면 실행
+                p
+                    span 상사 :
+                    input(value=emp.MGR,name="mgr")
+                p
+                    span 부서 :
+                    input(value=emp.DEPTNO,name="deptno")
+                p
+                    a(href=`/emp/Delete.do?empno=${emp.EMPNO}`) 삭제&nbsp;
+                    button(type="submit") 수정제출
+

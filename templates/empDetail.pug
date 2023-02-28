@@ -1,0 +1,43 @@
+extends layout.pug
+block content
+    // layout.pug 파일을 포함시키겠다! + empDetail.pug 의 블럭.파일을 content로 명령 => detail 파일에 layout.pug 파일이 추가된다!!!!
+    body
+        h1 사원 리스트 (Read)
+        div
+            p
+                span 사번 :
+                strong=emp.EMPNO
+            p
+                span 이름 :
+                strong=emp.ENAME
+            p
+                span 직책 :
+                strong=emp.JOB
+            p
+                span 급여 :
+                strong=emp.SAL
+            p
+                span 상여금 :
+                strong=emp.COMM
+            p
+                span 입사일 :
+                strong=emp.HIREDATE && emp.HIREDATE.toLocaleDateString("ko-KR")
+                //strong=emp.HIREDATE?.toLocaleDateString("ko-KR") - 옵셔널체이닝 - 퍼그에서 지원X
+                // 옵셔널 체이닝. true일때만 실행하라
+                //strong=emp.HIREDATE && null.toLocaleDateString("ko-KR")
+                // 입사일이 있으면? 있기때문에  emp.HIREDATE.toLocaleDateString("ko-KR") 실행
+                // 자바스크립트에서는 값이 없다는것은 null 을 의미
+                // 입사일이 없으면 null 이되므로 에러가 난다.
+                // && 모두가 투루가 될때까지 연산. 모두가 true여야 실행. 하나라도 false 라면 그다음은 실행X
+                // && 가 투루가 나올때까지 실행. false 가 나오면 멈춘다.
+            p
+                span 상사 :
+                strong=emp.MGR
+            p
+                span 부서 :
+                strong=emp.DEPTNO
+            p
+                a(href=`/emp/${emp.EMPNO}/update.do`) 수정폼
+            // 일반적인 url : http://localhost:8888/emp/update.do?empno=7521
+            // REST path variable url : http://localhost:8888/emp/7521/update.do
+            // **보통 파라미터의 이름이 db의 칼럼명과 같아서 보안을 취약하게 할 수 있다.

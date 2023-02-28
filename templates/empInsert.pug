@@ -1,0 +1,75 @@
+extends layout.pug
+block content
+    script(src="/js/emp/insert.js",defer=true)
+    // 사원등록 - insert.js 파일로 AJAX 통신으로 사원정보 연결하기!
+    style.
+        form[name=empInsertForm] input {
+            border-style: none;
+            border-bottom: 1px solid #333;
+        }
+        form[name=empInsertForm] input:focus {
+            outline: none;
+        }
+        .inputCont.error {
+            color: darkred;
+        }
+        .inputCont.error input {
+            border-color: darkred;
+        }
+        .inputCont.success {
+            color: seagreen;
+        }
+        .inputCont.success input {
+            border-color: seagreen;
+        }
+    main
+        h1 사원 등록 폼
+        form(name="empInsertForm",action="/emp/insert.do",method="POST")
+            div.inputCont
+                p
+                    span 사번  :
+                    input(value="",name="empno")
+                    // ajax 로 사번 중복 체크
+                p#empnoMsg
+            div.inputCont
+                p
+                    span 이름 :
+                    input(value="",name="ename")
+                p#enameMsg
+            div.inputCont
+                p
+                    span 직책 :
+                    input(value="",name="job")
+                p#jobMsg
+            div.inputCont
+                p
+                    span 급여 :
+                    input(value="",name="sal")
+                p#salMsg
+            div.inputCont
+                p
+                    span 상여금 :
+                    input(value="",name="comm")
+                p#commMsg
+            p
+                span 입사일 :
+                -const now=new Date();
+                -let y=now.getUTCFullYear();
+                -let m=now.getUTCMonth()+1;
+                -m=(m<10)?"0"+m:m;
+                -let d=now.getUTCDate();
+                -d=(d<10)?`0${d}`:d;
+                -let nowStr=`${y}-${m}-${d}`;
+                input(type="date",name="hiredate",value=nowStr)
+            div.inputCont
+                p
+                    span 상사 :
+                    input(value="",name="mgr")
+                p#mgrMsg // empnoCheck.do 로 참조가능한 상사!
+            div.inputCont
+                p
+                    span 부서 :
+                    input(value="",name="deptno")
+                p#deptnoMsg // deptnoCheck.do 로 참조가능한 부서번호!
+            p
+                button(type="submit") 등록제출
